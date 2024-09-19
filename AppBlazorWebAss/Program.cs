@@ -11,7 +11,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddHttpClient("IJGZAPI", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7157/");
+    client.BaseAddress = new Uri("http://localhost:8080/api/");
 });
 
 builder.Services.AddScoped<ProductIJGZService>();
