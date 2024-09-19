@@ -55,9 +55,15 @@ else
     </table>
 }
 
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
 @code {
     private List<ProductIJGZDTO> products;
     private ProductIJGZDTO newProduct = new ProductIJGZDTO();
+    private string errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -67,9 +73,18 @@ else
 
     private async Task HandleValidSubmit()
     {
-        var createdProduct = await productService.CreateProductAsync(newProduct);
-        products.Add(createdProduct);
-        newProduct = new ProductIJGZDTO();
+        try
+        {
+            var createdProduct = await productService.CreateProductAsync(newProduct);
+            products.Add(createdProduct);
+            newProduct = new ProductIJGZDTO();
+            errorMessage = null; // Limpiar mensaje de error
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error al crear el producto: " + ex.Message; // Manejo de errores
+        }
+
         products = products.OrderByDescending(s => s.Id).ToList();
     }
 }
