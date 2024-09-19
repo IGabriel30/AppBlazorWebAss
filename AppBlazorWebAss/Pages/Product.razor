@@ -7,24 +7,34 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <div class="form-group">
-        <label>Nombre</label>
-        <InputText @bind-Value="newProduct.NombreIJGZ" class="form-control" />
-        <ValidationMessage For="@(() => newProduct.NombreIJGZ)" />
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="productName">Nombre</label>
+                <InputText id="productName" @bind-Value="newProduct.NombreIJGZ" class="form-control" />
+                <ValidationMessage For="@(() => newProduct.NombreIJGZ)" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="productPrice">Precio</label>
+                <InputNumber id="productPrice" @bind-Value="newProduct.PrecioIJGZ" class="form-control" />
+                <ValidationMessage For="@(() => newProduct.PrecioIJGZ)" />
+            </div>
+        
     </div>
-
-    <div class="form-group">
-        <label>Descripción</label>
-        <InputTextArea @bind-Value="newProduct.DescripcionIJGZ" class="form-control" />
-        <ValidationMessage For="@(() => newProduct.DescripcionIJGZ)" />
     </div>
-
-    <div class="form-group">
-        <label>Precio</label>
-        <InputNumber @bind-Value="newProduct.PrecioIJGZ" class="form-control" />
-        <ValidationMessage For="@(() => newProduct.PrecioIJGZ)" />
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="productDescription">Descripción</label>
+                <InputTextArea id="productDescription" @bind-Value="newProduct.DescripcionIJGZ" class="form-control" rows="3" />
+                <ValidationMessage For="@(() => newProduct.DescripcionIJGZ)" />
+            </div>
+        </div>
     </div>
-
+    <br/>
     <button type="submit" class="btn btn-primary">Guardar Producto</button>
 </EditForm>
 
@@ -34,30 +44,32 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in products)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered mt-3">
+            <thead class="table-dark">
                 <tr>
-                    <td>@product.NombreIJGZ</td>
-                    <td>@product.DescripcionIJGZ</td>
-                    <td>@product.PrecioIJGZ</td>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var product in products)
+                {
+                    <tr>
+                        <td>@product.NombreIJGZ</td>
+                        <td>@product.DescripcionIJGZ</td>
+                        <td>@product.PrecioIJGZ</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
 @if (errorMessage != null)
 {
-    <div class="alert alert-danger">@errorMessage</div>
+    <div class="alert alert-danger mt-3">@errorMessage</div>
 }
 
 @code {
